@@ -1,3 +1,4 @@
+require 'pry'
 
 board = [0,1,2,3,4,5,6,7,8]
      
@@ -16,17 +17,17 @@ def printboard(board)
 
      end
 
-def win?(board)
+# def win?(board)
     
-    iswin = false
+#     iswin = false
     
-			wins.each do |win| 
-  		if board[win[0]]==board[win[1]] && board[win[1]]==board[win[2]]  
-     iswin = board[win[0]]    
-     	break   
-   		end      
-			end 
-			end  
+# 			wins.each do |win| 
+#   		if board[win[0]]==board[win[1]] && board[win[1]]==board[win[2]]  
+#      iswin = board[win[0]]    
+#      	break   
+#    		end      
+# 			end 
+# 			end  
 
 def play(board)
 
@@ -44,8 +45,7 @@ def play(board)
  				until choices.include?(input)             ## WORKS w/ .to_i method, but only w/ .to_i after gets.chomp     
  					puts 'please make a valid choice'
  					input = gets.chomp.to_i                 ##WORKS w/o .to_i method
- 			                   
- 				end
+ 			  end
        
        if turn_count % 2 == 0
        			board[input] = "x"
@@ -54,7 +54,7 @@ def play(board)
        		  board[input] = "o"
        		  next_player = "x"
        	end
-       turn_count += 1	
+      turn_count += 1	
        printboard(board)
 
       
