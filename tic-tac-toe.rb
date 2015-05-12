@@ -1,7 +1,9 @@
 require 'pry'
 
 board = [0,1,2,3,4,5,6,7,8]
-     
+
+WINS = [ [0, 1, 2], [3, 4, 5], [6, 7, 8], [0, 3, 6], [1, 4, 7], [2, 5, 8], [0, 4, 8], [2, 4, 6] ]
+
 def printboard(board)
 			
 			
@@ -15,54 +17,55 @@ def printboard(board)
        puts
        puts
 
-     end
+end
 
-# def win?(board)
+def win?(board)
     
-#     iswin = false
+    WINS.any? { |x, y, z| board[x] == board[y] && board[y] == board[z] } #Thanks Brit!
+   
+    # .any? passes each element of the collection to the given block. 
+    # The method returns true if the block ever returns a value other than false or nil.
+end
+   
+def draw?(board)
     
-# 			wins.each do |win| 
-#   		if board[win[0]]==board[win[1]] && board[win[1]]==board[win[2]]  
-#      iswin = board[win[0]]    
-#      	break   
-#    		end      
-# 			end 
-# 			end  
+    board.all? { |x| x.is_a? String }     #Thanks Brit!
+    
+end
 
 def play(board)
 
     turn_count = 0
     next_player = "x"
 
-     while true
-     	printboard(board)
+    until win?(board) || draw?(board)
 
-    	
-      puts "Player #{next_player}, select a position (0-8)" 
-      input = gets.chomp.to_i # Does input need to be an integer?  Check to see if this is necessary
- 				
- 				choices = (0..8).to_a
- 				until choices.include?(input)             ## WORKS w/ .to_i method, but only w/ .to_i after gets.chomp     
- 					puts 'please make a valid choice'
- 					input = gets.chomp.to_i                 ##WORKS w/o .to_i method
- 			  end
-       
-       if turn_count % 2 == 0
-       			board[input] = "x"
-       			next_player = "o"
-       	else
-       		  board[input] = "o"
-       		  next_player = "x"
-       	end
-      turn_count += 1	
-       printboard(board)
+    printboard(board)
 
+    puts "Player #{next_player}, select a position (0-8)" 
+    input = gets.chomp 
+    available = board.select { |x| x.is_a? Fixnum }  #Thanks Brit!
       
+      until input =~ /^#{available}$/
+      
+        puts "Sorry, please pick a numbered square: "
+        input = gets.chomp
+      
+      end
+      
+        input.to_i 
 
+      if turn_count % 2 == 0
+            board[input.to_i] = "x"
+            next_player = "o"
+        else
+            board[input.to_i] = "o"
+            next_player = "x"
+      end
+    
+    turn_count += 1   
 
- 
 end
-end
-
+    end
+    
 play(board)
-win?(board)
