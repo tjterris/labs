@@ -1,37 +1,29 @@
 class Coffee
 
-def initialize(coffee)
+  attr_accessor :name, :coffee, :size
 
-  @coffee = coffee
+  def initialize(name)
+    @name = name
+    @coffee = coffee
+    @size = 3
+  end
 
+  def full?
+    if @size == 3
+      true
+    else
+      false
+    end
+  end
 
-def full?
-true if tsmf = true || false if tsmf = false
-end
-
-
-def empty?
-  true
-end
-
-
-def tsmf
-    false
-end
-
-
-
-
-
-
-
+  def empty?
+    if @size == 0
+      true
+    else
+      false
+    end
+  end
 
 
 
-
-
-
-
-
-end
 end

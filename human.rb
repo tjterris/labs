@@ -1,40 +1,37 @@
 class Human
 
+  attr_accessor :name, :alertness, :coffee
+
   def initialize(name)
     @name = name
-    @alertness = 0.0
-
-    #@alertness = 0.0
-
-  end
-
-  def alertness
-    @alertness
+    @alertness = 0
+    @coffee = nil 
   end
 
   def has_coffee?
-  
-  false
-
+    if @coffee
+      true
+    else
+      false
+    end
   end
 
   def needs_coffee?
-  
-  true
-  
+    if !@coffee
+      true
+    else
+      false
+    end
   end
 
-
-  def buy(tsmf)
-
-   @tsmf=tsmf
+  def buy(item)
+    @coffee = item
   end
 
   def drink!
-    true
+    @coffee.size -= 1
+    @alertness += 0.33
   end
-
-
 
 
 end
